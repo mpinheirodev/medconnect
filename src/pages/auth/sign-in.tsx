@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 
 const signInForm = z.object({
   email: z.string().email(),
+  password: z.string(),
 })
 
 type signInForm = z.infer<typeof signInForm>
@@ -42,7 +43,7 @@ export function SignIn() {
     <>
       <Helmet title="Login" />
       <div className="p-8">
-        <Button variant="outline" asChild className="absolute right-8 top-8 bg-emerald-500 hover:bg-emerald-600 text-accent hover:text-accent font-bold">
+        <Button variant="outline" asChild className="absolute right-8 top-8 bg-emerald-500 hover:bg-emerald-600 text-accent hover:text-accent font-bold shadow">
           <Link to="/sign-up">Cadastrar-se</Link>
         </Button>
         <div className="flex w-[350px] flex-col justify-center gap-6">
@@ -62,10 +63,10 @@ export function SignIn() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Senha</Label>
-              <Input id="password" type="password" {...register('email')} />
+              <Input id="password" type="password" {...register('password')} />
             </div>
 
-            <Button disabled={isSubmitting} type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 font-bold hover:text-accent">
+            <Button disabled={isSubmitting} type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 font-bold hover:text-accent shadow">
               Acessar
             </Button>
           </form>

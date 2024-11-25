@@ -8,6 +8,7 @@ import {
 
 type SelectFilterProps = {
   placeholder: string,
+  value?: string
 }
 
 export function TimePicker( { placeholder }: SelectFilterProps ) {

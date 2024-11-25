@@ -17,7 +17,7 @@ export function Welcome() {
           <h1 className='text-6xl font-semibold w-[600px]'>
             Cuidamos de você com empatia e inovação, trazendo soluções avançadas para cuidar da sua saúde.
           </h1>
-          <Button className='bg-emerald-500 text-xl font-bold w-fit p-8 hover:bg-emerald-700'>
+          <Button className='bg-emerald-500 text-xl font-bold w-fit p-8 hover:bg-emerald-700 shadow'>
             Marque aqui sua consulta
           </Button>
         </div>
@@ -30,7 +30,7 @@ export function Welcome() {
           <SelectFilter type='medico' placeholder='Médico' />
           <DatePicker />
           <TimePicker placeholder='Horário' />
-          <Button type='submit' className='bg-emerald-500 font-bold hover:bg-emerald-600'>
+          <Button type='submit' className='bg-emerald-500 font-bold hover:bg-emerald-600 shadow'>
             Filtrar
             <Filter className='w-6 h-6' />
           </Button>

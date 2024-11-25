@@ -16,7 +16,7 @@ export function CardDoctor() {
         <h2>Dr. José</h2>
         <p>Clínico geral</p>
       </div>
-      <Link to="/agendamento">
+      <Link to="/scheduling">
         <Button className="bg-emerald-500 hover:bg-emerald-600 text-md">
           Agendar
         </Button>

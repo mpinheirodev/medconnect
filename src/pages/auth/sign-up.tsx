@@ -46,10 +46,10 @@ export function SignUp() {
     <>
       <Helmet title="Cadastro" />
       <div className="p-8">
-        <Button variant="outline" asChild className="absolute right-8 top-8 bg-emerald-500 hover:bg-emerald-600 text-accent hover:text-accent">
+        <Button variant="outline" asChild className="absolute right-8 top-8 bg-emerald-500 hover:bg-emerald-600 text-accent hover:text-accent shadow">
           <Link to="/sign-in">Fazer login</Link>
         </Button>
-        <div className="flex w-[350px] flex-col justify-center gap-6">
+        <div className="flex w-[450px] flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
               Criar conta grátis
@@ -60,40 +60,63 @@ export function SignUp() {
           </div>
 
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="pacientName">Nome completo</Label>
-              <Input
-                id="pacientName"
-                type="text"
-                {...register('pacientName')}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Seu e-mail</Label>
-              <Input 
-              id="email" 
-              type="email" 
-              {...register('email')} 
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Sua senha</Label>
-              <Input
-                id="password"
+            <div className='grid grid-cols-2 gap-4'>
+              <div className="space-y-2">
+                <Label htmlFor="pacientName">Nome completo</Label>
+                <Input
+                  id="pacientName"
+                  type="text"
+                  placeholder='Digite seu nome...'
+                  {...register('pacientName')}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Seu e-mail</Label>
+                <Input 
+                id="email" 
+                type="email" 
+                placeholder='email@exemplo.com'
+                {...register('email')} 
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Sua senha</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder='********'
+                  {...register('password')}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Digite a senha novamente</Label>
+                <Input 
+                id="password" 
                 type="password"
-                {...register('password')}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Digite novamente sua senha</Label>
-              <Input 
-              id="password" 
-              type="password" 
-              {...register('password')} 
-              />
+                placeholder='********'
+                {...register('password')} 
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Digite número de contato</Label>
+                <Input 
+                id="phone" 
+                type="tel"
+                placeholder='(99) 99999-9999'
+                {...register('phone')} 
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="birthDate">Data de nascimento</Label>
+                <Input 
+                id="birthDate" 
+                type="date" 
+                {...register('birthDate')} 
+                />
+              </div>
             </div>
 
-            <Button disabled={isSubmitting} type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 font-bold hover:text-accent">
+            <Button disabled={isSubmitting} type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 font-bold hover:text-accent shadow">
               Finalizar cadastro
             </Button>
 

@@ -6,6 +6,8 @@ import { Scheduling } from './pages/app/scheduling'
 import { AuthLayout } from '@/pages/_layouts/auth'
 import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
+import { Confimation } from './pages/app/confirmation'
+import { Profile } from './pages/app/profile'
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +15,9 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { path: '/', element: <Welcome /> },
-      { path: '/agendamento', element: <Scheduling /> },
+      { path: '/scheduling', element: <Scheduling /> },
+      { path: '/confirmation', element: <Confimation /> },
+      { path: '/profile', element: <Profile /> },
     ],
   },
   {
