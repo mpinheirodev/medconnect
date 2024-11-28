@@ -8,6 +8,8 @@ import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
 import { Profile } from './pages/app/profile'
 import { AboutUS } from './pages/app/about-us'
+import { ProfileLayout } from './pages/_layouts/profile'
+import { MinhaConsulta } from './pages/app/minhaConsulta'
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ export const router = createBrowserRouter([
       { path: '/scheduling', element: <Scheduling /> },
       { path: '/profile', element: <Profile /> },
       { path: '/about', element: <AboutUS /> },
+    ],
+  },
+  {
+    path: '/',
+    element: <ProfileLayout />,
+    children: [
+      { path: '/profile', element: <Profile /> },
+      { path: '/appointment', element: <MinhaConsulta /> },
     ],
   },
   {
