@@ -1,8 +1,9 @@
+import { Helmet } from "react-helmet-async";
 
 export function Profile() {
   return (
-    <div>
-      <h1>Profile</h1>
-    </div>
+    <>
+      <Helmet title="Perfil" />
+    </>
   )
 }

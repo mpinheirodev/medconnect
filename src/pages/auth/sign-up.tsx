@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'sonner'
+import { toast, Toaster } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -46,6 +46,7 @@ export function SignUp() {
     <>
       <Helmet title="Cadastro" />
       <div className="p-8">
+        <Toaster richColors />
         <Button variant="outline" asChild className="absolute right-8 top-8 bg-emerald-500 hover:bg-emerald-600 text-accent hover:text-accent shadow">
           <Link to="/sign-in">Fazer login</Link>
         </Button>
@@ -80,6 +81,23 @@ export function SignUp() {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="phone">Digite número de contato</Label>
+                <Input 
+                id="phone" 
+                type="tel"
+                placeholder='(99) 99999-9999'
+                {...register('phone')} 
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="birthDate">Data de nascimento</Label>
+                <Input 
+                id="birthDate" 
+                type="date" 
+                {...register('birthDate')} 
+                />
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="password">Sua senha</Label>
                 <Input
                   id="password"
@@ -95,23 +113,6 @@ export function SignUp() {
                 type="password"
                 placeholder='********'
                 {...register('password')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Digite número de contato</Label>
-                <Input 
-                id="phone" 
-                type="tel"
-                placeholder='(99) 99999-9999'
-                {...register('phone')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="birthDate">Data de nascimento</Label>
-                <Input 
-                id="birthDate" 
-                type="date" 
-                {...register('birthDate')} 
                 />
               </div>
             </div>

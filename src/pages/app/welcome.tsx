@@ -12,13 +12,13 @@ export function Welcome() {
   return (
     <div>
       <Helmet title="Bem-vindo" />
-      <div className='flex-1 flex items-center justify-evenly mb-80 pt-10'>
+      <div className='flex-1 flex items-center justify-evenly h-svh'>
         <div className='flex flex-col gap-16'>
           <h1 className='text-6xl font-semibold w-[600px]'>
             Cuidamos de você com empatia e inovação, trazendo soluções avançadas para cuidar da sua saúde.
           </h1>
           <Button className='bg-emerald-500 text-xl font-bold w-fit p-8 hover:bg-emerald-700 shadow'>
-            Marque aqui sua consulta
+            Busque aqui sua consulta
           </Button>
         </div>
         <img className='h-[600px]' src={MedicaImage} alt="ImagemMedica" />

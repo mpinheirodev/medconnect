@@ -3,7 +3,7 @@ import { CircleCheck } from "lucide-react"
 
 export function Confimation() {
   return (
-    <div className="bg-emerald-700 text-accent flex-1 -m-10 -mb-20 p-10 flex gap-4 flex-col items-center justify-center">
+    <div className="bg-emerald-700 text-accent flex-1 p-10 flex gap-4 flex-col items-center justify-center">
       <CircleCheck className="h-40 w-40" />
       <h1 className="text-3xl">Seu agendamento foi confirmado!</h1>
       <div className="flex flex-col gap-2 items-center">
