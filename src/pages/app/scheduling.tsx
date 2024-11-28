@@ -11,14 +11,20 @@ import { toast, Toaster } from "sonner";
 export function Scheduling() {
 
   const [date, setDate] = useState<Date | undefined>(new Date())
-  const [time, setTime] = useState('')
+
+  const [selectedTime, setselectedTime] = useState<string | null>(null);
+
+  const handleValueChange = (value: string) => {
+    setselectedTime(value);
+  };
+  
 
   async function handleSchedule() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       toast.success('Agendamento concluído.',{
-        description: 'Sua consulta foi agendada com sucesso para o dia: ' + date?.toLocaleDateString() + ' às ' + time,
+        description: 'Sua consulta foi agendada com sucesso para o dia: ' + date?.toLocaleDateString() + ' às ' + selectedTime,
       })
     } catch {
       toast.error('Erro ao cadastrar agendamento.')
@@ -50,13 +56,15 @@ export function Scheduling() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center gap-3">
               <h1>Horário</h1>
-              <TimePicker placeholder="Escolha um horário" />
+              <TimePicker 
+              placeholder="Escolha um horário"
+              onValueChange={handleValueChange}
+              />
             </div>
             <div>
               <Toaster
               duration={8000}
               richColors
-              closeButton
               />
               <Button 
               className="bg-emerald-500 hover:bg-emerald-600"
@@ -67,13 +75,13 @@ export function Scheduling() {
             </div>
             <div className="h-full text-md flex flex-col gap-2">
               Confirme data e hora selecionadas
-              {date && time ? 
+              {date && selectedTime ? 
               <div className='flex flex-col gap-2'>
                 <span>
                   {date?.toLocaleDateString()}
                 </span>
                 <span>
-                  {time}
+                  {selectedTime}
                 </span>
               </div>
               :
