@@ -9,10 +9,12 @@ export function AuthLayout() {
         <div className="flex items-center gap-3 text-lg font-medium text-accent">
           <Link to='/' className='flex items-center gap-2'>
             <Syringe className="h-6 w-6" />
+            <h1 className='text-2xl font-semibold'>
               MedConnect
+            </h1>
           </Link>
         </div>
-        <div className='flex-1 flex flex-col items-center justify-between'>
+        <div className='flex-1 flex flex-col items-center justify-between pt-20'>
           <h1 className='w-80 text-accent font-bold text-4xl'>CADA CONSULTA, FEITA PARA VOCÊ</h1>
           <img src={doctor2} alt="" className='h-[700px]' />
         </div>
