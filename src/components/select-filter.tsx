@@ -6,19 +6,22 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { doutores } from "@/doutores.json"
+
 type SelectFilterProps = {
   placeholder: string,
-  type: string
+  type: string,
+  onValueChange?: any
 }
 
-export function SelectFilter( { placeholder, type }: SelectFilterProps ) {
+export function SelectFilter( { placeholder, type, onValueChange }: SelectFilterProps ) {
 
-  const especialidades = ['Dentista', 'Clínico geral', 'Oftalmologista']
-  const medicos = ['Dr. João', 'Dr. Maria', 'Dr. José']
+  const especialidades = doutores.map((doutor) => doutor.specialty).filter((value, index, self) => self.indexOf(value) === index)
+  const medicos = doutores.map((doutor) => doutor.name)
 
   return (
-    <div>
-      <Select>
+    <div className="shadow">
+      <Select onValueChange={onValueChange} >
         <SelectTrigger className='w-[180px] text-muted-foreground hover:text-primary'>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

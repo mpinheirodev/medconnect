@@ -1,28 +1,39 @@
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ptBR } from 'date-fns/locale';
 import { TimePicker } from "@/components/time-picker";
 import { ProfileCard } from "@/components/profile-card";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
 import { toast, Toaster } from "sonner";
+import { useParams } from "react-router-dom";
+import { doutores } from "@/doutores.json";
 
 
 export function Scheduling() {
 
   const [date, setDate] = useState<Date | undefined>(new Date())
-
   const [selectedTime, setselectedTime] = useState<string | null>(null);
+  const [doutor, setDoutor] = useState<any>(null);
+
+  const { id } = useParams()
+  useEffect(() => {
+    const selectedDoutor = doutores.find((doutor) => doutor.id === id);
+    setDoutor(selectedDoutor);
+  }, [id]);
+
+  if (!doutor) {
+    return <div>Carregando...</div>
+  }
 
   const handleValueChange = (value: string) => {
     setselectedTime(value);
   };
-  
 
   async function handleSchedule() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000))
-
+      
       toast.success('Agendamento concluído.',{
         description: 'Sua consulta foi agendada com sucesso para o dia: ' + date?.toLocaleDateString() + ' às ' + selectedTime,
       })
@@ -39,7 +50,7 @@ export function Scheduling() {
         <span className="">Escolha a data e horário para sua consulta</span>
       </div>
       <div className="flex-1 grid grid-cols-2 gap-10 items-start justify-center p-8">
-        <div className="px-16 py-6 text-2xl font-semibold text-center rounded-md border border-slate-400 bg-slate-100 grid grid-cols-2 justify-evenly shadow" >
+        <div className="px-16 py-6 text-2xl font-semibold text-center rounded-md border border-slate-400 bg-slate-100 grid grid-cols-2 justify-evenly shadow">
           <div className='flex flex-col justify-center items-center'>
             <h1>Data</h1>
             <Calendar
@@ -49,14 +60,15 @@ export function Scheduling() {
             onSelect={setDate}
             disabled={[
               { before: new Date() },
-              { dayOfWeek: [0, 6] }
+              { dayOfWeek: [0, 6] },
             ]}
             />
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center gap-3">
               <h1>Horário</h1>
-              <TimePicker 
+              <TimePicker
+              doutor={doutor}
               placeholder="Escolha um horário"
               onValueChange={handleValueChange}
               />
@@ -69,6 +81,7 @@ export function Scheduling() {
               <Button 
               className="bg-emerald-500 hover:bg-emerald-600"
               onClick={handleSchedule}
+              disabled={!date || !selectedTime}
               >
                 Confirmar agendamento
               </Button>
@@ -91,7 +104,7 @@ export function Scheduling() {
           </div>
         </div>
         <div className="h-full shadow">
-          <ProfileCard />
+          <ProfileCard doutor={doutor}/>
         </div>
       </div>
     </div>

@@ -1,0 +1,168 @@
+{
+  "doutores": [
+    {
+      "id": "1",
+      "name": "Dr. João Silva",
+      "specialty": "Cardiologista",
+      "phone": "(11) 98765-4321",
+      "disponibilidade": [
+        {
+          "dia": "Segunda-feira",
+          "horarios": ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"]
+        },
+        {
+          "dia": "Quarta-feira",
+          "horarios": ["10:00", "11:00", "15:00", "16:00"]
+        },
+        {
+          "dia": "Sexta-feira",
+          "horarios": ["08:00", "09:00", "10:00", "11:00", "12:00"]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Dr. Carlos Pereira",
+      "specialty": "Cardiologista",
+      "phone": "(21) 99876-5432",
+      "disponibilidade": [
+        {
+          "dia": "Segunda-feira",
+          "horarios": ["08:00", "11:00", "13:00", "17:00"]
+        },
+        {
+          "dia": "Quinta-feira",
+          "horarios": ["09:00", "12:00", "14:00", "18:00"]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Dr. Felipe Souza",
+      "specialty": "Ortopedista",
+      "phone": "(31) 98765-4321",
+      "disponibilidade": [
+        {
+          "dia": "Terça-feira",
+          "horarios": ["09:00", "12:00", "14:00"]
+        },
+        {
+          "dia": "Sexta-feira",
+          "horarios": ["09:00", "11:00", "14:00", "16:00"]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Dra. Mariana Souza",
+      "specialty": "Ortopedista",
+      "phone": "(41) 97654-3210",
+      "disponibilidade": [
+        {
+          "dia": "Segunda-feira",
+          "horarios": ["10:00", "12:00", "14:00"]
+        },
+        {
+          "dia": "Sexta-feira",
+          "horarios": ["09:00", "11:00", "15:00"]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Dr. Lucas Ferreira",
+      "specialty": "Dermatologista",
+      "phone": "(51) 96543-2109",
+      "disponibilidade": [
+        {
+          "dia": "Segunda-feira",
+          "horarios": ["09:00", "10:00", "13:00"]
+        },
+        {
+          "dia": "Quinta-feira",
+          "horarios": ["09:00", "12:00", "14:00"]
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Dra. Roberta Almeida",
+      "specialty": "Dermatologista",
+      "phone": "(61) 98765-4321",
+      "disponibilidade": [
+        {
+          "dia": "Terça-feira",
+          "horarios": ["10:00", "12:00", "15:00"]
+        },
+        {
+          "dia": "Sexta-feira",
+          "horarios": ["09:00", "11:00", "14:00"]
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Dr. Eduardo Lima",
+      "specialty": "Pediatra",
+      "phone": "(71) 98765-4321",
+      "disponibilidade": [
+        {
+          "dia": "Segunda-feira",
+          "horarios": ["08:00", "11:00", "14:00"]
+        },
+        {
+          "dia": "Sexta-feira",
+          "horarios": ["09:00", "13:00", "15:00"]
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Dra. Juliana Ribeiro",
+      "specialty": "Pediatra",
+      "phone": "(81) 97654-3210",
+      "disponibilidade": [
+        {
+          "dia": "Terça-feira",
+          "horarios": ["09:00", "12:00", "14:00"]
+        },
+        {
+          "dia": "Quinta-feira",
+          "horarios": ["10:00", "12:00", "15:00"]
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Dr. Rafael Gomes",
+      "specialty": "Psiquiatra",
+      "phone": "(91) 98765-4321",
+      "disponibilidade": [
+        {
+          "dia": "Segunda-feira",
+          "horarios": ["10:00", "13:00", "15:00"]
+        },
+        {
+          "dia": "Quinta-feira",
+          "horarios": ["09:00", "11:00", "14:00"]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Dra. Gabriela Pinto",
+      "specialty": "Psiquiatra",
+      "phone": "(71) 97654-3210",
+      "disponibilidade": [
+        {
+          "dia": "Terça-feira",
+          "horarios": ["09:00", "12:00", "13:00"]
+        },
+        {
+          "dia": "Sexta-feira",
+          "horarios": ["10:00", "13:00", "15:00"]
+        }
+      ]
+    }
+  ]
+}
