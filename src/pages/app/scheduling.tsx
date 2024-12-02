@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { toast, Toaster } from "sonner";
 import { useParams } from "react-router-dom";
 import { doutores } from "@/doutores.json";
-
+import { criarAgendamento } from "@/service/agendamento";
 
 export function Scheduling() {
 
@@ -31,14 +31,25 @@ export function Scheduling() {
   };
 
   async function handleSchedule() {
+    if (!date || !selectedTime) return;
+    const formattedDate = date.toISOString().split('T')[0];
+    const payload = {
+      data: date?.toISOString().split('T')[0],
+      hora: selectedTime,
+      idMedico: doutor.id,
+      idPaciente: 1,
+    }
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      
-      toast.success('Agendamento concluído.',{
-        description: 'Sua consulta foi agendada com sucesso para o dia: ' + date?.toLocaleDateString() + ' às ' + selectedTime,
-      })
-    } catch {
-      toast.error('Erro ao cadastrar agendamento.')
+      await criarAgendamento({
+        payload
+      });
+
+      toast.success('Agendamento concluído.', {
+        description: `Sua consulta foi agendada com sucesso para o dia ${formattedDate} às ${selectedTime}`,
+      });
+    } catch (error: any) {
+      console.log(error)
+      toast.error('Erro ao cadastrar agendamento.');
     }
   }
 
@@ -54,41 +65,41 @@ export function Scheduling() {
           <div className='flex flex-col justify-center items-center'>
             <h1>Data</h1>
             <Calendar
-            locale={ptBR}
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            disabled={[
-              { before: new Date() },
-              { dayOfWeek: [0, 6] },
-            ]}
+              locale={ptBR}
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              disabled={[
+                { before: new Date() },
+                { dayOfWeek: [0, 6] },
+              ]}
             />
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center gap-3">
               <h1>Horário</h1>
               <TimePicker
-              doutor={doutor}
-              placeholder="Escolha um horário"
-              onValueChange={handleValueChange}
+                doutor={doutor}
+                placeholder="Escolha um horário"
+                onValueChange={handleValueChange}
               />
             </div>
             <div>
               <Toaster
-              duration={8000}
-              richColors
+                duration={8000}
+                richColors
               />
-              <Button 
-              className="bg-emerald-500 hover:bg-emerald-600"
-              onClick={handleSchedule}
-              disabled={!date || !selectedTime}
+              <Button
+                className="bg-emerald-500 hover:bg-emerald-600"
+                onClick={handleSchedule}
+                disabled={!date || !selectedTime}
               >
                 Confirmar agendamento
               </Button>
             </div>
             <div className="h-full text-md flex flex-col gap-2">
               Confirme data e hora selecionadas
-              {date && selectedTime ? 
+              {date && selectedTime ?
               <div className='flex flex-col gap-2'>
                 <span>
                   {date?.toLocaleDateString()}
@@ -104,7 +115,7 @@ export function Scheduling() {
           </div>
         </div>
         <div className="h-full shadow">
-          <ProfileCard doutor={doutor}/>
+          <ProfileCard doutor={doutor} />
         </div>
       </div>
     </div>

@@ -26,22 +26,29 @@ export function SignIn() {
   async function handleSignIn(data: signInForm) {
     try {
       const response = await loginUsuario({ payload: data });
-      localStorage.setItem("idUsuario", response.data.idUsuario);
+
+      console.log('Resposta da API:', response);
 
       if (response.status === 200) {
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-        toast.success('Logado Com Sucesso.', {
-          action: {
-            label: 'Reenviar',
-            onClick: () => handleSignIn(data),
-          },
-        })
-        window.location.href = "/"
+        if (response.data && response.data.nome) {
+          localStorage.setItem("idUsuario", response.data.idUsuario);
+          localStorage.setItem("nome", response.data.nome);
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          toast.success('Logado com sucesso.', {
+            action: {
+              label: 'Reenviar',
+              onClick: () => handleSignIn(data),
+            },
+          });
+          window.location.href = "/";
+        } else {
+          console.error('Nome não encontrado na resposta');
+          toast.error('O nome não foi encontrado.');
+        }
       }
 
-
     } catch (error: any) {
-      toast.error('Credênciais inválidas.')
+      toast.error('Credenciais inválidas.');
     }
   }
 
