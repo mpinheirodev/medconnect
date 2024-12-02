@@ -26,16 +26,20 @@ export function SignIn() {
   async function handleSignIn(data: signInForm) {
     try {
       const response = await loginUsuario({ payload: data });
-      
-      if(response.status === 200) window.location.href = "/"
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      localStorage.setItem("idUsuario", response.data.idUsuario);
 
-      toast.success('Enviamos um link de autenticação para seu e-mail.', {
-        action: {
-          label: 'Reenviar',
-          onClick: () => handleSignIn(data),
-        },
-      })
+      if (response.status === 200) {
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        toast.success('Logado Com Sucesso.', {
+          action: {
+            label: 'Reenviar',
+            onClick: () => handleSignIn(data),
+          },
+        })
+        window.location.href = "/"
+      }
+
+
     } catch (error: any) {
       toast.error('Credênciais inválidas.')
     }
