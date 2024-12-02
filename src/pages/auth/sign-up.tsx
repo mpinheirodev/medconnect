@@ -52,11 +52,11 @@ export function SignUp() {
 
       localStorage.setItem("idUsuario", response.data.idUsuario);
 
-      await new Promise(() => setTimeout(window.location.href = "/", 2000))
+      await new Promise(() => setTimeout(window.location.href = "/sign-up", 2000))
       toast.success('Paciente cadastrado com sucesso.', {
         action: {
           label: 'Login',
-          onClick: () => navigate('/'),
+          onClick: () => navigate('/sign-in'),
         },
       })
     } catch (error: any) {
@@ -139,9 +139,9 @@ export function SignUp() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="senha">Digite a senha novamente</Label>
+                <Label htmlFor="ReSenha">Digite a senha novamente</Label>
                 <Input
-                  id="senha"
+                  id="ReSenha"
                   type="password"
                   placeholder='********'
                   {...register('senha')}
