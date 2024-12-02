@@ -7,10 +7,11 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { loginUsuario } from '@/service/agendamento'
 
 const signInForm = z.object({
   email: z.string().email(),
-  password: z.string(),
+  senha: z.string(),
 })
 
 type signInForm = z.infer<typeof signInForm>
@@ -24,8 +25,9 @@ export function SignIn() {
 
   async function handleSignIn(data: signInForm) {
     try {
-      console.log(data)
-
+      const response = await loginUsuario({ payload: data });
+      
+      if(response.status === 200) window.location.href = "/"
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       toast.success('Enviamos um link de autenticação para seu e-mail.', {
@@ -34,7 +36,7 @@ export function SignIn() {
           onClick: () => handleSignIn(data),
         },
       })
-    } catch {
+    } catch (error: any) {
       toast.error('Credênciais inválidas.')
     }
   }
@@ -62,8 +64,8 @@ export function SignIn() {
               <Input id="email" type="email" {...register('email')} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input id="password" type="password" {...register('password')} />
+              <Label htmlFor="senha">Senha</Label>
+              <Input id="senha" type="password" {...register('senha')} />
             </div>
 
             <Button disabled={isSubmitting} type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 font-bold hover:text-accent shadow">

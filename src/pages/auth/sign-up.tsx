@@ -7,19 +7,29 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { criarUsuario } from '@/service/agendamento'
+import { useState } from 'react'
 
 const signUpForm = z.object({
-  pacientName: z.string(),
-  password: z.string(),
+  nome: z.string(),
+  senha: z.string(),
   email: z.string().email(),
-  phone: z.string().min(11),
-  birthDate: z.string(),
+  telefone: z.string().min(11),
+  sexo: z.string().min(11),
 })
 
 type signUpForm = z.infer<typeof signUpForm>
 
 export function SignUp() {
   const navigate = useNavigate()
+  const [selectSexo, setSelectSexo] = useState("")
 
   const {
     register,
@@ -28,19 +38,34 @@ export function SignUp() {
   } = useForm<signUpForm>()
 
   async function handleSignUp(data: signUpForm) {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
 
+    try {
+      const payload = {
+        nome: data.nome,
+        telefone: data.telefone,
+        email: data.email,
+        senha: data.senha,
+        sexo: selectSexo
+      }
+
+      const response = await criarUsuario({ payload });
+
+      localStorage.setItem("idUsuario", response.data.idUsuario);
+      await new Promise((resolve) => setTimeout(window.location.href = "/", 2000))
       toast.success('Paciente cadastrado com sucesso.', {
         action: {
           label: 'Login',
-          onClick: () => navigate('/sign-in'),
+          onClick: () => navigate('/'),
         },
       })
-    } catch {
-      toast.error('Erro ao cadastrar paciente.')
+    } catch (error: any) {
+      toast.error('Erro ao cadastrar paciente. Por favor, tente novamente')
     }
   }
+
+  const handleValueChange = (value: string) => {
+    setSelectSexo(value);
+  };
 
   return (
     <>
@@ -63,56 +88,62 @@ export function SignUp() {
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
             <div className='grid grid-cols-2 gap-4'>
               <div className="space-y-2">
-                <Label htmlFor="pacientName">Nome completo</Label>
+                <Label htmlFor="nome">Nome completo</Label>
                 <Input
-                  id="pacientName"
+                  id="nome"
                   type="text"
                   placeholder='Digite seu nome...'
-                  {...register('pacientName')}
+                  {...register('nome')}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Seu e-mail</Label>
-                <Input 
-                id="email" 
-                type="email" 
-                placeholder='email@exemplo.com'
-                {...register('email')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Digite número de contato</Label>
-                <Input 
-                id="phone" 
-                type="tel"
-                placeholder='(99) 99999-9999'
-                {...register('phone')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="birthDate">Data de nascimento</Label>
-                <Input 
-                id="birthDate" 
-                type="date" 
-                {...register('birthDate')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Sua senha</Label>
                 <Input
-                  id="password"
+                  id="email"
+                  type="email"
+                  placeholder='email@exemplo.com'
+                  {...register('email')}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="telefone">Digite número de contato</Label>
+                <Input
+                  id="telefone"
+                  type="tel"
+                  minLength={11}
+                  maxLength={11}
+                  placeholder='(99) 99999-9999'
+                  {...register('telefone')}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="sexo">Sexo</Label>
+                <Select onValueChange={handleValueChange} >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Sexo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="M">Masculino</SelectItem>
+                    <SelectItem value="F">Feminino</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="senha">Sua senha</Label>
+                <Input
+                  id="senha"
                   type="password"
                   placeholder='********'
-                  {...register('password')}
+                  {...register('senha')}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Digite a senha novamente</Label>
-                <Input 
-                id="password" 
-                type="password"
-                placeholder='********'
-                {...register('password')} 
+                <Label htmlFor="senha">Digite a senha novamente</Label>
+                <Input
+                  id="senha"
+                  type="password"
+                  placeholder='********'
+                  {...register('senha')}
                 />
               </div>
             </div>
