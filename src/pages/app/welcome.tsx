@@ -128,7 +128,7 @@ export function Welcome() {
           </div>
         </form>
       </div>
-      <div className='w-full flex-1 flex gap-6 flex-wrap justify-center items-center py-6 xl:px-30'>
+      <div className='w-full flex-1 flex gap-6 flex-wrap justify-center items-center py-6 xl:px-40'>
         {filteredDoctors.length > 0 ? 
         filteredDoctors.map((doutor) => (
           <CardDoctor key={doutor.id} doutor={doutor} />
