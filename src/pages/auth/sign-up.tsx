@@ -51,8 +51,8 @@ export function SignUp() {
       const response = await criarUsuario({ payload });
 
       localStorage.setItem("idUsuario", response.data.idUsuario);
-
-      await new Promise(() => setTimeout(window.location.href = "/sign-up", 2000))
+      localStorage.setItem("nome", response.data.nome);
+      await new Promise(() => setTimeout(window.location.href = "/", 2000))
       toast.success('Paciente cadastrado com sucesso.', {
         action: {
           label: 'Login',

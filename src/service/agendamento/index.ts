@@ -8,10 +8,8 @@ export function loginUsuario({payload}: any) {
   return BASEAPI.post("/usuarios/login", payload)
 }
 
-export function criarAgendamento({ idPaciente, idMedico, idHorario, payload }: any) {
-  return BASEAPI.post("/agendamentos", payload, {
-    params: { idPaciente, idMedico, idHorario }
-  });
+export function criarAgendamento({ payload }: { payload: any }) {
+  return BASEAPI.post("/agendamentos", payload);
 }
 
 export function listarAgendamentos() {
