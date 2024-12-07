@@ -10,6 +10,7 @@ import { Profile } from './pages/app/profile'
 import { AboutUS } from './pages/app/about-us'
 import { ProfileLayout } from './pages/_layouts/profile'
 import { MinhaConsulta } from './pages/app/minhaConsulta'
+import { Consultations } from './pages/app/consultations'
 
 export const router = createBrowserRouter([
   {
@@ -18,8 +19,8 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <Welcome /> },
       { path: '/scheduling/:id', element: <Scheduling /> },
-      { path: '/profile', element: <Profile /> },
       { path: '/about', element: <AboutUS /> },
+      { path: '/consultations', element: <Consultations />}
     ],
   },
   {

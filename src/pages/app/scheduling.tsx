@@ -7,23 +7,27 @@ import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
 import { toast, Toaster } from "sonner";
 import { useParams } from "react-router-dom";
-import { doutores } from "@/doutores.json";
-import { criarAgendamento } from "@/service/agendamento";
+import { buscarMedicoPorId, criarAgendamento } from "@/service/agendamento";
 
 export function Scheduling() {
 
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [selectedTime, setselectedTime] = useState<string | null>(null);
   const [doutor, setDoutor] = useState<any>(null);
-
-  const { id } = useParams()
+  
   useEffect(() => {
-    const selectedDoutor = doutores.find((doutor) => doutor.id === id);
-    setDoutor(selectedDoutor);
-  }, [id]);
+    listaMedicos() 
+  }, [])
 
-  if (!doutor) {
-    return <div>Carregando...</div>
+  const listaMedicos = async () => {
+    const { id } = useParams()
+    if (!id) return;
+    try {
+      const response = await buscarMedicoPorId(id)
+      setDoutor(response.data)
+      console.log('Resposta da API:', response.data);
+    } catch (erro) {
+      console.error('Erro ao buscar médicos:', erro);}
   }
 
   const handleValueChange = (value: string) => {
@@ -115,7 +119,7 @@ export function Scheduling() {
           </div>
         </div>
         <div className="h-full shadow">
-          <ProfileCard doutor={doutor} />
+            <ProfileCard />
         </div>
       </div>
     </div>

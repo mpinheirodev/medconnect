@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { atualizarUsuario, buscarUsuarioPorId } from '@/service/agendamento';
 import { Pencil } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
@@ -67,12 +68,12 @@ export function Profile() {
     }
   };
 
-  useEffect(() => {
-    const userId = localStorage.getItem("idUsuario");
-    if (!userId) {
-      navigate('/sign-in');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const userId = localStorage.getItem("idUsuario");
+  //   if (!userId) {
+  //     navigate('/sign-in');
+  //   }
+  // }, [navigate]);
 
   const handleValueChangeSexo = (value: string) => {
     setSelectSexo(value);
@@ -90,9 +91,9 @@ export function Profile() {
     setTelefone(value);
   };
 
-  if (!usuario) {
-    return <div>Carregando...</div>;
-  }
+  // if (!usuario) {
+  //   return <div>Carregando...</div>;
+  // }
 
   const handleLogout = () => {
     localStorage.clear();
@@ -101,24 +102,24 @@ export function Profile() {
 
   return (
     <div className="flex-1 p-8">
-      <main>
+      <Helmet title="Perfil" />
         <section className="mb-8">
           <h2 className="text-lg font-title mb-4 text-green-950">Perfil</h2>
           <div className="bg-green-50 border border-green-300 p-6 flex justify-between rounded-md">
             <div>
               <p className="text-green-950">
-                <strong>Nome completo:</strong> {nome}
+                <strong>Nome completo:</strong>
               </p>
               <p className="text-green-950">
-                <strong>Endereço de Email:</strong> {email}
+                <strong>Endereço de Email:</strong> 
               </p>
             </div>
             <div>
               <p className="text-green-950">
-                <strong>Número de telefone:</strong> {telefone}
+                <strong>Número de telefone:</strong> 
               </p>
               <p className="text-green-950">
-                <strong>Gênero:</strong> {usuario.sexo === "M" ? "Masculino" : "Feminino"}
+                <strong>Gênero:</strong> 
               </p>
             </div>
             <button className="text-green-700" onClick={() => setIsEditing(true)}>
@@ -141,12 +142,6 @@ export function Profile() {
             </div>
           </div>
         </section>
-        <div className="mt-8">
-          <Button className="bg-red-500 text-white hover:bg-red-600" onClick={handleLogout}>
-            Deslogar
-          </Button>
-        </div>
-      </main>
       {isEditing && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-8 rounded-md w-[400px]">

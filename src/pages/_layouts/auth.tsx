@@ -14,9 +14,9 @@ export function AuthLayout() {
             </h1>
           </Link>
         </div>
-        <div className='flex-1 flex flex-col items-center justify-between pt-20'>
-          <h1 className='w-80 text-accent font-bold text-4xl'>CADA CONSULTA, FEITA PARA VOCÊ</h1>
-          <img src={doctor2} alt="" className='h-[700px]' />
+        <div className='flex-1 flex flex-col items-center justify-between pt-10 lg:pt-20'>
+          <h1 className='w-52 xl:w-80 text-accent text-center font-bold text-xl xl:text-4xl'>CADA CONSULTA, FEITA PARA VOCÊ</h1>
+          <img src={doctor2} alt="" className='h-[450px] xl:h-[700px]' />
         </div>
       </div>
 

@@ -12,11 +12,11 @@ type CardDoctorProps = {
 
 export function CardDoctor({ doutor }: CardDoctorProps) {
   return (
-    <div className="w-fit flex flex-col gap-2 border rounded-lg py-6 px-12 items-center justify-center bg-slate-100 shadow">
+    <div className="w-fit flex flex-col gap-2 border rounded-lg py-6 px-12 items-center justify-center bg-slate-100 shadow" key={doutor.id}>
       <img src={userDeault} alt="user profile" className="w-40" />
       <div className="flex flex-col items-center justify-center">
-        <h2>{doutor.name}</h2>
-        <p>{doutor.specialty}</p>
+        <h2>{doutor?.name}</h2>
+        <p>{doutor?.specialty}</p>
       </div>
       <Link to={`/scheduling/${doutor.id}`}>
         <Button className="bg-emerald-500 hover:bg-emerald-600 text-md">

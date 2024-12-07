@@ -8,7 +8,7 @@ export function ProfileLayout() {
   return (
     <div>
       <Header />
-      <div className="h-[calc(100vh-101px)] w-screen bg-green-100 flex">
+      <div className="h-[calc(100vh-125px)] w-screen bg-emerald-100 flex">
         <MenuLateral />
         <Outlet />
       </div>

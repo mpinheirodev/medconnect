@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { toast } from 'sonner'
+import { toast, Toaster } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -33,6 +33,7 @@ export function SignIn() {
         if (response.data && response.data.nome) {
           localStorage.setItem("idUsuario", response.data.idUsuario);
           localStorage.setItem("nome", response.data.nome);
+          localStorage.setItem("email", response.data.email);
           await new Promise((resolve) => setTimeout(resolve, 2000));
           toast.success('Logado com sucesso.', {
             action: {
@@ -83,6 +84,7 @@ export function SignIn() {
               Acessar
             </Button>
           </form>
+          <Toaster />
         </div>
       </div>
     </>

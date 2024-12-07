@@ -30,7 +30,7 @@ export function SelectFilter( { placeholder, type, onValueChange }: SelectFilter
             <SelectItem key={i} value={value}>{value}</SelectItem>
           )) 
           : 
-          medicos.map((value, i) => (
+          ["Amanda Sales", "Abraão Araujo", "Gabriella Nascimento", "Evandro França", "Matheus Pinheiro", "Marcelo Gabriel"].map((value, i) => (
             <SelectItem key={i} value={value}>{value}</SelectItem>
           ))}
         </SelectContent>

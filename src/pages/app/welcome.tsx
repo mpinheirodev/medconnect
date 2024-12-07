@@ -16,11 +16,33 @@ import { SelectFilter } from '@/components/select-filter'
 import { TimePicker } from '@/components/time-picker'
 import { CardDoctor } from '@/components/card-doctor'
 import { Filter } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { doutores } from '@/doutores.json'
+import { listarMedicos } from "@/service/agendamento";
 
 
 export function Welcome() {
+
+  const weekday = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sabado"]
+  const [date, setDate] = useState<any>();
+  const [selectedTime, setselectedTime] = useState<string>('');
+  const [selectedSpecialty, setselectedSpecialty] = useState<string>('');
+  const [selectedDoctor, setselectedDoctor] = useState<string>('');
+  const [filteredDoctors, setFilteredDoctors] = useState(doutores);
+  const [medicos, setMedicos] = useState<any[]>([])
+  
+  useEffect(() => {
+    listaMedicos() 
+  }, [])
+
+  const listaMedicos = async () => {
+    try {
+      const response = await listarMedicos()
+      setMedicos(response.data)
+      console.log('Resposta da API:', response.data);
+    } catch (erro) {
+      console.error('Erro ao buscar médicos:', erro);}
+  }
 
   const targetRef = useRef<HTMLDivElement>(null);
 
@@ -29,13 +51,6 @@ export function Welcome() {
       targetRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }
-
-  const weekday = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sabado"]
-  const [date, setDate] = useState<any>();
-  const [selectedTime, setselectedTime] = useState<string>('');
-  const [selectedSpecialty, setselectedSpecialty] = useState<string>('');
-  const [selectedDoctor, setselectedDoctor] = useState<string>('');
-  const [filteredDoctors, setFilteredDoctors] = useState(doutores);
 
   const handleTimeChange = (value: string) => {
     setselectedTime(value);
@@ -52,28 +67,18 @@ export function Welcome() {
   function handleFilter(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const results = doutores.filter((doutor) => {
-      if (!date || !selectedTime) {
-        return false
-      } else if (!selectedSpecialty && !selectedDoctor) {
-        return (
-          doutor.disponibilidade.some(d => d.dia.includes(weekday[date.getDay()])) &&
-          doutor.disponibilidade.some(d => d.horarios.includes(selectedTime))
-        )
-      }
       return (
         doutor.specialty === selectedSpecialty &&
-        doutor.disponibilidade.some(d => d.dia.includes(weekday[date.getDay()])) &&
-        doutor.disponibilidade.some(d => d.horarios.includes(selectedTime)) ||
         doutor.name === selectedDoctor
-      )
-    })    
+      );
+    });   
     setFilteredDoctors(results);
   }
 
   return (
     <div>
       <Helmet title="Bem-vindo" />
-      <div className='flex-1 flex items-center justify-evenly h-svh'>
+      <div className='flex-1 flex items-center justify-evenly h-[calc(100vh-89px)]'>
         <div className='flex flex-col gap-16'>
           <h1 className='text-6xl font-semibold w-[600px]'>
             Cuidamos de você com empatia e inovação, trazendo soluções avançadas para cuidar da sua saúde.

@@ -1,10 +1,13 @@
 import { Pencil, X } from "lucide-react";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export function MinhaConsulta() {
   const [consultas, setConsultas] = useState(true)
   return (
-    <div className="mx-auto my-10 w-9/12">
+    <>
+    <Helmet title="Minhas consultas" />
+      <div className="mx-auto my-10 w-9/12">
       <h1 className="text-neutral-950 font-title text-lg mb-4">Painel de consultas</h1>
       {consultas ? <div className="border border-neutral-950 bg-white rounded-md p-4 flex items-start justify-between">
         <div>
@@ -29,5 +32,6 @@ export function MinhaConsulta() {
         <h1 className="flex"><X />Nenhuma Consulta disponivel</h1>
       </>}
     </div>
+    </>
   )
 }

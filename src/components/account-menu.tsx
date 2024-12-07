@@ -1,55 +1,74 @@
-import { UserRound } from 'lucide-react'
+import { LogOut, ScrollText, UserCircle, UserRound } from 'lucide-react'
 import { Button } from './ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { useUser } from '@/context/userContext';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 export function AccountMenu() {
-  const { user, loading } = useUser();
 
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
+  const [usuarioNome, setUsuarioNome] = useState<string | null>(null);
+  const [usuarioEmail, setUsuarioEmail] = useState<string | null>(null);
 
-  if (!user) {
-      return <Link to='/sign-in'>
-      <Button className="flex select-none items-center gap-2 bg-emerald-500 border-emerald-500 hover:bg-emerald-600">
-        <UserRound className="h-4 w-4" />
-        Entrar
-      </Button>
-    </Link>
-  }
+  useEffect(() => {
+    const nomeUsuario = localStorage.getItem("nome");
+    const emailUsuario = localStorage.getItem("email");
 
-  console.log(user)
-  // const [usuarioNome, setUsuarioNome] = useState<string | null>(null);
+    if (nomeUsuario) {
+      setUsuarioEmail(emailUsuario);
+      setUsuarioNome(nomeUsuario);
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   const nomeUsuario = localStorage.getItem("nome");
-  //   if (nomeUsuario) {
-  //     console.log(nomeUsuario)
-  //     setUsuarioNome(nomeUsuario);
-  //   }
-  // }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = '/sign-in';
+  };
 
   return (
     <div>
-      {/* {usuarioNome ? (
+      {usuarioNome ? (
         <div className='flex'>
-          <Avatar onClick={() => window.location.href = "/profile"} className='cursor-pointer'>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <p className="text-green-950 font-bold w-[100px] text-center">Seja bem-vindo, {usuarioNome}!</p>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                className="bg-emerald-500 flex select-none items-center gap-2 text-accent font-bold shadow hover:bg-emerald-600"
+              >
+                <UserCircle className="h-4 w-4" />
+                {usuarioNome}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel className="flex flex-col">
+                <span>{usuarioNome}</span>
+                <span className="text-xs font-normal text-muted-foreground">
+                  {usuarioEmail}
+                </span>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => window.location.href = "/profile"}>
+                <UserCircle className="mr-2 h-4 w-4" />
+                <span>Perfil do usuário</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => window.location.href = "/consultations"}>
+                <ScrollText className="mr-2 h-4 w-4" />
+                <span>Minhas consultas</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-rose-500 dark:text-rose-400" onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Sair</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
-      ) : ( */}
+      ) : (
         <Link to='/sign-in'>
           <Button className="flex select-none items-center gap-2 bg-emerald-500 border-emerald-500 hover:bg-emerald-600">
             <UserRound className="h-4 w-4" />
             Entrar
           </Button>
         </Link>
-      {/* )} */}
+      )}
     </div>
   )
 }

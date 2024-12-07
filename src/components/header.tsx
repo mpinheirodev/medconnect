@@ -17,10 +17,6 @@ export function Header() {
 
         <div className="ml-auto flex items-center gap-4">
           <nav className="flex items-center space-x-4 lg:space-x-6">
-            <NavLink to="/">
-              <CircleHelp className="h-4 w-4" />
-              Ajuda
-            </NavLink>
             <NavLink to="/about">
               <Info className="h-4 w-4" />
               Sobre nós
